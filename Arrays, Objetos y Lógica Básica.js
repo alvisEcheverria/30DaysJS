@@ -1,6 +1,6 @@
 //Semana 1 – Arrays, Objetos y Lógica Básica (Días 1–7)
 
-//Día 1 : Crear un array de 10 números y devolver el mayor, menor y promedio.
+//Día 1: Crear un array de 10 números y devolver el mayor, menor y promedio.
 
 const number = [1, 3, 4, 6, 8, 22, 10, 2, 26, 30];
 
@@ -17,7 +17,7 @@ const average = number.reduce((acc, el) => acc + el, 0) / number.length;
 
 console.log({ MAX, MIN, average });
 
-//Día 2 : Hacer un objeto “usuario” con nombre, edad y hobbies; imprimir sus propiedades con destructuring.
+//Día 2: Hacer un objeto “usuario” con nombre, edad y hobbies; imprimir sus propiedades con destructuring.
 
 const usuario = {
     nombre: "Alvis Echeverria",
@@ -58,3 +58,25 @@ function presentarUsuario({ nombre = "unnamed", edad = 23, hobbies =  [] }) {
 };
 
 console.log(presentarUsuario(usuario));
+
+//Día 3: Filtrar un array de objetos (usuarios) por edad mayor a 18.
+
+
+const usuarios = [
+  { nombre: "Ana", edad: 17 },
+  { nombre: "Luis", edad: 18 },
+  { nombre: "Marta", edad: 21 },
+  { nombre: "Pepe", edad: "20" },   // string numérico
+  { nombre: "Sofía" },              // sin edad
+  { nombre: "Iván", edad: null },
+  { nombre: "Zoe", edad: 0 },
+  { nombre: "Raúl", edad: 19.5 },   // no entero
+  { nombre: "Gus", edad: -3 },
+];
+
+
+function filtrarMayores(users){
+
+}
+
+console.log( filtrarMayores(usuarios))
