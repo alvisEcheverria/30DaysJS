@@ -74,9 +74,26 @@ const usuarios = [
   { nombre: "Gus", edad: -3 },
 ];
 
+//Sí el usuario no tiene edad, ¿es inmortal?
+usuarios.forEach(({edad}, index)=> {
 
-function filtrarMayores(users){
+    if(edad === undefined){
+        usuarios[index].edad = Infinity;
+    };
+    
+});
 
-}
+function filtrarMayores(users, min = 18){
+
+    //Acepto números decimales, enteros, string y negativos, siempre que sean mayores a 18.
+    //Convierto string númericos con +, me aseguro de tomar los negativos convirtiendolos en valores absolutos.
+
+    const absoluteValue = (number)=> Math.abs(+number);
+
+    return min >= 18 ?
+        { mayores: users.filter(({edad}) => absoluteValue(edad) >= 18).sort((a, b) => absoluteValue(b.edad) - absoluteValue(a.edad))}
+        :
+        { menores: users.filter(({edad}) => absoluteValue(edad) < 18 && edad !== null).sort((a, b) => absoluteValue(b.edad) - absoluteValue(a.edad)) }
+};
 
 console.log( filtrarMayores(usuarios))
