@@ -74,26 +74,36 @@ const usuarios = [
   { nombre: "Gus", edad: -3 },
 ];
 
-//Sí el usuario no tiene edad, ¿es inmortal?
-usuarios.forEach(({edad}, index)=> {
 
-    if(edad === undefined){
-        usuarios[index].edad = Infinity;
+function filtrarMayoresYMenores(users, min = 18){
+
+    let newUsersArray = structuredClone(users);
+
+    try{
+        if(!Array.isArray(newUsersArray)){
+            //Si los datos ingresados no están almacenados en un Array, se arroja un error.
+            throw new TypeError("Los usuarios deben estar en un Array.");
+        } else if(typeof min !== "number" || min < 12){
+             //Si los datos ingresados no son un carácter numérico, se arroja un error.
+            throw new RangeError("La edad debe ser un carácter numérico y reflejar al menos 12 años.");
+        } else { 
+            //Añadimos null por defecto a los usuarios sin edad registrada, queremos solo trabajar con números enteros
+            //por lo que nos aseguramos de que los números retornados en la función sean la edad ya cumplida por el usuario y
+            //para los números negativos, también pondremos null como valor por defecto.
+            newUsersArray.forEach((user)=> {
+                    let edad = Number(Math.floor(user.edad ?? NaN));
+                    user.edad = (isNaN(edad) || edad < 12) ? null : edad;
+            }); 
+            //Agregamos min al filtro para que la busqueda sea inteligente desde la edad ingresada por el usuario, sigue estando por defecto la edad de 18 años.
+            const resultado = newUsersArray.filter(user => 
+                user.edad !== null && (min >= 18 ? user.edad >= min : user.edad <= min)
+            ).sort((a, b) => b.edad - a.edad);
+            return resultado;
+        }   
+    } catch (error){
+        return error;
     };
-    
-});
 
-function filtrarMayores(users, min = 18){
-
-    //Acepto números decimales, enteros, string y negativos, siempre que sean mayores a 18.
-    //Convierto string númericos con +, me aseguro de tomar los negativos convirtiendolos en valores absolutos.
-
-    const absoluteValue = (number)=> Math.abs(+number);
-
-    return min >= 18 ?
-        { mayores: users.filter(({edad}) => absoluteValue(edad) >= 18).sort((a, b) => absoluteValue(b.edad) - absoluteValue(a.edad))}
-        :
-        { menores: users.filter(({edad}) => absoluteValue(edad) < 18 && edad !== null).sort((a, b) => absoluteValue(b.edad) - absoluteValue(a.edad)) }
 };
 
-console.log( filtrarMayores(usuarios))
+console.log(filtrarMayoresYMenores(usuarios, 17));
