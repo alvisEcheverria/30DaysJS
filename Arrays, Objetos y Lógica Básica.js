@@ -107,3 +107,16 @@ function filtrarMayoresYMenores(users, min = 18){
 };
 
 console.log(filtrarMayoresYMenores(usuarios, 17));
+
+//Día 4: Mapear un array de strings a su longitud y convertir a mayúsculas.
+
+const palabras = ["javascript", "map", "array", "día"];
+
+const resultado = palabras.map( palabra => {
+  return {
+    original: "???",
+    length: "???"
+  }
+});
+
+console.log(resultado);
