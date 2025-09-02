@@ -112,11 +112,15 @@ console.log(filtrarMayoresYMenores(usuarios, 17));
 
 const palabras = ["javascript", "map", "array", "día"];
 
-const resultado = palabras.map( palabra => {
-  return {
-    original: "???",
-    length: "???"
-  }
-});
+//Podríamos hacerlo con map y simplificarlo pero en este caso como práctica, usaremos reduce.
+
+const resultado = palabras.reduce((acc, palabra)  => {
+    acc.push({
+        original: palabra.toUpperCase(),
+        length: palabra.length,
+        isLong: palabra.length > 4
+    })
+    return acc;
+}, []);
 
 console.log(resultado);
