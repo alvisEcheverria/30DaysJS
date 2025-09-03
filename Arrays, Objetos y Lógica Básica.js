@@ -124,3 +124,27 @@ const resultado = palabras.reduce((acc, palabra)  => {
 }, []);
 
 console.log(resultado);
+
+//Día 5: Reducir un array de números a su suma y producto.
+
+const values = [2, 3, 5, 7, 11];
+
+const accumulatedResult = values.reduce((accumulator, currentValue) => {
+
+    const newSum = accumulator.runningSum + currentValue;
+    const newProduct = accumulator.runningProduct * currentValue;
+    
+    return {
+        runningSum: newSum,
+        runningProduct: newProduct,
+        steps: [
+            ...accumulator.steps, 
+            { runningSum: newSum, runningProduct: newProduct }
+        ]
+    };
+
+}, { runningSum: 0,  runningProduct: 1, steps: []});
+
+console.log(accumulatedResult);
+
+
