@@ -147,4 +147,44 @@ const accumulatedResult = values.reduce((accumulator, currentValue) => {
 
 console.log(accumulatedResult);
 
+// Día 6: Crear una función que reciba un string y devuelva cuántas veces aparece cada letra.
+
+// Reto Día 6
+
+// Crea una función que reciba un string cualquiera y devuelva un objeto donde las claves sean las letras y los valores la cantidad de veces que aparece cada letra en el string.
+
+// 🔹 Condiciones del reto:
+
+// No ignores mayúsculas/minúsculas (es decir "A" y "a" cuentan como letras diferentes).
+
+// Ignora los espacios " ".
+
+// Usa solo lo que ya sabes: bucles, reduce, split, map o lo que quieras.
+
+// No uses librerías externas, solo JS nativo.
+
+// Extra Challenge Día 6
+
+// Extiende la función para que el resultado:
+
+// Devuelva las letras ordenadas alfabéticamente.
+
+// También incluya un contador total de caracteres analizados (sin contar espacios).
+
+// Extra Hardcore Challenge Día 6
+
+// Mejora la función para que:
+
+// Ignore mayúsculas/minúsculas (case-insensitive).
+
+// "Hola" y "hola" cuentan como lo mismo.
+
+// Ignore espacios y signos de puntuación (.,!?¿¡:;-"()[]{}...).
+
+// Solo se cuentan letras reales.
+
+// Devuelva las letras ordenadas alfabéticamente.
+
+// Incluya el total de letras válidas analizadas.
+
 
