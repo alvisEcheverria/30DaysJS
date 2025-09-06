@@ -1,5 +1,7 @@
 //Semana 1 – Arrays, Objetos y Lógica Básica (Días 1–7)
 
+const separator = "---------------------------------------------------------------------------------------------------"
+
 //Día 1: Crear un array de 10 números y devolver el mayor, menor y promedio.
 
 const number = [1, 3, 4, 6, 8, 22, 10, 2, 26, 30];
@@ -16,6 +18,7 @@ const MIN = Math.min(...number);
 const average = number.reduce((acc, el) => acc + el, 0) / number.length; 
 
 console.log({ MAX, MIN, average });
+console.log(separator);
 
 //Día 2: Hacer un objeto “usuario” con nombre, edad y hobbies; imprimir sus propiedades con destructuring.
 
@@ -58,6 +61,7 @@ function presentarUsuario({ nombre = "unnamed", edad = 23, hobbies =  [] }) {
 };
 
 console.log(presentarUsuario(usuario));
+console.log(separator);
 
 //Día 3: Filtrar un array de objetos (usuarios) por edad mayor a 18.
 
@@ -107,6 +111,7 @@ function filtrarMayoresYMenores(users, min = 18){
 };
 
 console.log(filtrarMayoresYMenores(usuarios, 17));
+console.log(separator);
 
 //Día 4: Mapear un array de strings a su longitud y convertir a mayúsculas.
 
@@ -124,6 +129,7 @@ const resultado = palabras.reduce((acc, palabra)  => {
 }, []);
 
 console.log(resultado);
+console.log(separator);
 
 //Día 5: Reducir un array de números a su suma y producto.
 
@@ -146,45 +152,40 @@ const accumulatedResult = values.reduce((accumulator, currentValue) => {
 }, { runningSum: 0,  runningProduct: 1, steps: []});
 
 console.log(accumulatedResult);
+console.log(separator);
 
 // Día 6: Crear una función que reciba un string y devuelva cuántas veces aparece cada letra.
 
-// Reto Día 6
-
-// Crea una función que reciba un string cualquiera y devuelva un objeto donde las claves sean las letras y los valores la cantidad de veces que aparece cada letra en el string.
-
 // 🔹 Condiciones del reto:
 
-// No ignores mayúsculas/minúsculas (es decir "A" y "a" cuentan como letras diferentes).
-
 // Ignora los espacios " ".
-
-// Usa solo lo que ya sabes: bucles, reduce, split, map o lo que quieras.
-
+// Ignore mayúsculas/minúsculas (case-insensitive).
+// Ignore espacios y signos de puntuación (.,!?¿¡:;-"()[]{}...).
+// Devuelva las letras ordenadas alfabéticamente.
+// También incluya un contador total de caracteres analizados (sin contar espacios).
+// Incluya el total de letras válidas analizadas.
+// Devuelva las letras ordenadas alfabéticamente.
 // No uses librerías externas, solo JS nativo.
 
-// Extra Challenge Día 6
+const paragraph = "Haz cada cosa en la vida, como si fuera lo último que hagas.";
 
-// Extiende la función para que el resultado:
+function counterLetters(text){
+    const accentMap = { á: "a", é: "e", í: "i", ó: "o", ú: "u" };
+    const validCharacters =  text.toLowerCase()
+        .replace(/[áéíóú]/g, match => accentMap[match])
+        .split("")
+        .filter(character => /[a-z0-9]/.test(character));
 
-// Devuelva las letras ordenadas alfabéticamente.
+    const lettersCount = validCharacters.reduce((accumulator, currentCharacter) => {
+        accumulator.letters[currentCharacter] = (accumulator.letters[currentCharacter] || 0) + 1;
+        return accumulator;
+    }, {letters: { }});
 
-// También incluya un contador total de caracteres analizados (sin contar espacios).
+    return {
+        total: validCharacters.length,
+        letters: Object.fromEntries(Object.entries(lettersCount.letters).sort())
+    };
+};
 
-// Extra Hardcore Challenge Día 6
-
-// Mejora la función para que:
-
-// Ignore mayúsculas/minúsculas (case-insensitive).
-
-// "Hola" y "hola" cuentan como lo mismo.
-
-// Ignore espacios y signos de puntuación (.,!?¿¡:;-"()[]{}...).
-
-// Solo se cuentan letras reales.
-
-// Devuelva las letras ordenadas alfabéticamente.
-
-// Incluya el total de letras válidas analizadas.
-
-
+console.log(counterLetters(paragraph));
+console.log(separator);

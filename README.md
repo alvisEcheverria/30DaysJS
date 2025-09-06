@@ -1,5 +1,5 @@
 # Semana 1 – Arrays, Objetos y Lógica Básica (Días 1–7)
-
+ 
 ## Día	Ejercicio
 ## 1	Crear un array de 10 números y devolver el mayor, menor y promedio.
 ## 2	Hacer un objeto “usuario” con nombre, edad y hobbies; imprimir sus propiedades con destructuring.
