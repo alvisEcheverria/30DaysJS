@@ -154,7 +154,7 @@ const accumulatedResult = values.reduce((accumulator, currentValue) => {
 console.log(accumulatedResult);
 console.log(separator);
 
-// Día 6: Crear una función que reciba un string y devuelva cuántas veces aparece cada letra.
+// Crear una función que reciba un string y devuelva cuántas veces aparece cada letra.
 
 // 🔹 Condiciones del reto:
 
@@ -188,4 +188,47 @@ function counterLetters(text){
 };
 
 console.log(counterLetters(paragraph));
+console.log(separator);
+
+//Día 7: Mini reto: Combinar todos los ejercicios anteriores en una función que reciba un array de usuarios y devuelva un resumen estadístico.
+
+// 🔹 Resumen estadístico de todo el array:
+
+// Día 1: Calcular el mayor, menor y promedio de las edades.
+
+// Día 2: Mostrar el nombre, edad y hobbies con destructuring.
+
+// Día 3: Filtrar usuarios mayores de 18.
+
+// Día 4: Mapear hobbies → su longitud y en mayúsculas.
+
+// Día 5: Sumar y multiplicar todas las edades.
+
+// Día 6: Contar letras de todos los nombres (puedes reutilizar tu función counterLetters).
+
+function summaryInfo (users){
+    return {
+        stats: {
+            maxAge: "",
+            minAge: "",
+            avgAge: ""
+        },
+        users: [
+            { name, age, hobbies },
+        ],
+        adults: [ "" 
+
+        ], // mayores de 18
+        hobbiesTransformed: [ 
+
+        ], // hobbies mapeados
+        math: {
+            sum: "...",
+            product: "..."
+        },
+        letters: { a: ""}
+    }
+}
+
+console.log(summaryInfo(usuarios));
 console.log(separator);
