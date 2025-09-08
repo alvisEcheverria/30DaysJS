@@ -4,7 +4,7 @@ const separator = "-------------------------------------------------------------
 
 //Día 1: Crear un array de 10 números y devolver el mayor, menor y promedio.
 
-const number = [1, 3, 4, 6, 8, 22, 10, 2, 26, 30];
+const number = [1, 3, 4, 6, 8, 30, 10, 2, 26, 22];
 
 //Mayor:
 
@@ -43,18 +43,7 @@ const deepFreeze = obj => {
     return Object.freeze(obj);
 };
 
-deepFreeze(usuario);
-
-console.log({
-    name,
-    edad,
-    hobbies: {
-        primero,
-        segundo,
-        tercero,
-    },
-    hobbiesMap: [...hobbies]
-});
+deepFreeze(usuario);  
 
 function presentarUsuario({ nombre = "unnamed", edad = 23, hobbies =  [] }) {
     return `${ nombre } (${ edad }) — hobbies: ${ hobbies?.length ? hobbies.join(", ") : "loose" }`
@@ -67,17 +56,16 @@ console.log(separator);
 
 
 const usuarios = [
-  { nombre: "Ana", edad: 17 },
-  { nombre: "Luis", edad: 18 },
-  { nombre: "Marta", edad: 21 },
-  { nombre: "Pepe", edad: "20" },   // string numérico
-  { nombre: "Sofía" },              // sin edad
-  { nombre: "Iván", edad: null },
-  { nombre: "Zoe", edad: 0 },
-  { nombre: "Raúl", edad: 19.5 },   // no entero
-  { nombre: "Gus", edad: -3 },
+  { nombre: "Ana", edad: 17, hobbies: ["leer", "patinar", "fotografía"] },
+  { nombre: "Luis", edad: 18, hobbies: ["fútbol", "videojuegos", "viajar"] },
+  { nombre: "Marta", edad: 21, hobbies: ["pintar", "cantar"] },
+  { nombre: "Pepe", edad: "20", hobbies: ["programar", "ajedrez", "running"] },   // string numérico
+  { nombre: "Sofía"},                   // sin edad
+  { nombre: "Iván", edad: null, hobbies: ["cocinar", "series", "gimnasio"] },
+  { nombre: "Zoe", edad: 0, hobbies: ["bailar", "pintar"] },
+  { nombre: "Raúl", edad: 19.5, hobbies: ["música", "fotografía", "lectura"] },   // no entero
+  { nombre: "Gus", edad: -3, hobbies: ["ajedrez", "coleccionar monedas"] },
 ];
-
 
 function filtrarMayoresYMenores(users, min = 18){
 
@@ -135,23 +123,24 @@ console.log(separator);
 
 const values = [2, 3, 5, 7, 11];
 
-const accumulatedResult = values.reduce((accumulator, currentValue) => {
+const accumulatedResult = (numberArray)=>{
+    return numberArray.reduce((accumulator, currentValue) => {
+        const newSum = accumulator.runningSum + currentValue;
+        const newProduct = accumulator.runningProduct * currentValue;
 
-    const newSum = accumulator.runningSum + currentValue;
-    const newProduct = accumulator.runningProduct * currentValue;
-    
-    return {
-        runningSum: newSum,
-        runningProduct: newProduct,
-        steps: [
-            ...accumulator.steps, 
-            { runningSum: newSum, runningProduct: newProduct }
-        ]
-    };
+        return {
+            runningSum: newSum,
+            runningProduct: newProduct,
+            steps: [
+                ...accumulator.steps, 
+                { runningSum: newSum, runningProduct: newProduct }
+            ]
+        };
 
-}, { runningSum: 0,  runningProduct: 1, steps: []});
+    }, { runningSum: 0,  runningProduct: 1, steps: []});
+}
 
-console.log(accumulatedResult);
+console.log(accumulatedResult(values));
 console.log(separator);
 
 // Crear una función que reciba un string y devuelva cuántas veces aparece cada letra.
@@ -207,28 +196,69 @@ console.log(separator);
 // Día 6: Contar letras de todos los nombres (puedes reutilizar tu función counterLetters).
 
 function summaryInfo (users){
+
+    const filterUsersByAge = users.filter(({edad}) => typeof edad === "number" && edad > 11);
+    const usersForFix = users.filter((user)=> {
+        if(!Object.values(user).length || user.edad < 12 || typeof user.edad !== "number"){
+            return user;
+        }
+    });
+    
+    let maxAge = filterUsersByAge[0].edad;
+    let minAge = filterUsersByAge[0].edad;
+    const ages = filterUsersByAge.map(({edad}) => edad);
+
+    filterUsersByAge.forEach(({edad})=> {
+        let roundedAge = Math.floor(edad);
+
+        if(minAge > roundedAge){
+            minAge = roundedAge;
+        }
+        else if(maxAge < roundedAge){
+            maxAge = roundedAge;
+        }
+    });
+
+    const letters = filterUsersByAge.map(({nombre})=> {
+        return {
+                nombre,
+                letters: counterLetters(nombre)
+            }
+    });
+
     return {
-        stats: {
-            maxAge: "",
-            minAge: "",
-            avgAge: ""
+        usersFixed: {
+            stats: {
+                maxAge,
+                minAge,
+                avgAge: Math.floor(filterUsersByAge.reduce((accumulator, currentValue)=> accumulator + Math.floor(currentValue.edad), 0) / filterUsersByAge.length)
+            },
+            users: filterUsersByAge,
+            // Esta función tiene por defecto el filtrado de mayores a partir de 18, pero puede ser usada 
+            // para filtrar desde cualquier edad a partir de los 12 años, siendo esto también el minimo en la busqueda, de ahí surge el nombre.
+            adults: filtrarMayoresYMenores(filterUsersByAge), 
+            hobbiesTransformed: filterUsersByAge.map(({nombre, edad, hobbies}) => {
+                return {
+                    nombre,
+                    edad,
+                    hobbies: hobbies.map(hobbie => {
+                        return {   
+                            hobbie: hobbie.toUpperCase(),
+                            longitud: hobbie.length
+                        }
+                    })
+                }
+            }), // hobbies mapeados
+            math: {
+                // accumulatedRestult es una función que se encarga de reducir un array de números a su suma y producto, retornando el siguiente objeto: { runningSum: 0,  runningProduct: 1, steps: []}.
+                sum: accumulatedResult(ages).runningSum,
+                product: accumulatedResult(ages).runningProduct
+            },
+            letters
         },
-        users: [
-            { name, age, hobbies },
-        ],
-        adults: [ "" 
-
-        ], // mayores de 18
-        hobbiesTransformed: [ 
-
-        ], // hobbies mapeados
-        math: {
-            sum: "...",
-            product: "..."
-        },
-        letters: { a: ""}
+        usersForFix: usersForFix ?? "Felicidades, nada por hacer"
     }
 }
 
-console.log(summaryInfo(usuarios));
+console.dir(summaryInfo(usuarios), {depth: null});
 console.log(separator);
