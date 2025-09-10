@@ -275,7 +275,7 @@ console.log(separator);
 
 // 🔹Tenga un método format() que convierta los segundos en una cadena legible en formato:
 
-//      🔹"hh:mm:ss" → siempre con 2 dígitos por cada parte (ejemplo: 01:05:09).
+//      🔹"dd:hh:mm:ss" → siempre con 2 dígitos por cada parte (ejemplo: 01:05:09).
 
 // 2. Asegúrate de:
 
