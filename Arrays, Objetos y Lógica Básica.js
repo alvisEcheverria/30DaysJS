@@ -262,3 +262,43 @@ function summaryInfo (users){
 
 console.dir(summaryInfo(usuarios), {depth: null});
 console.log(separator);
+
+//SEMANA 2: 
+
+// Día 8: Crear una clase Timer que reciba segundos y tenga método format (como tu último reto).
+
+// 1. Crea una clase llamada Timer que:
+
+// 🔹Reciba en el constructor un número de segundos.
+
+// 🔹Guarde ese valor como propiedad interna (ej. this.seconds).
+
+// 🔹Tenga un método format() que convierta los segundos en una cadena legible en formato:
+
+//      🔹"hh:mm:ss" → siempre con 2 dígitos por cada parte (ejemplo: 01:05:09).
+
+// 2. Asegúrate de:
+
+// 🔹Usar padStart o similar para rellenar con ceros a la izquierda.
+
+// 🔹Manejar correctamente horas mayores a 24 si las hubiera (es decir, no las recortes, déjalas crecer).
+
+// 🔹Crea al menos 3 instancias de Timer con segundos distintos (por ejemplo, 59, 600, 3661) y muestra en consola su formato.
+
+class Timer {
+    constructor(seconds){
+        this.seconds = seconds;
+    }
+
+    format(){
+        
+    }
+}
+
+const t1 = new Timer(59);
+const t2 = new Timer(600);
+const t3 = new Timer(3661);
+
+console.log(t1.format());
+console.log(t2.format());
+console.log(t3.format());
