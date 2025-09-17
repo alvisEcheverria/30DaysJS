@@ -23,56 +23,30 @@
 class Timer {
     constructor(seconds){
         this.seconds = seconds;
-    }
+    };
 
     format(){
-        let formato = ["00", "00", "00", "00"];
-        let hours = 0;
-        let minutes = 0;
+        let segments = ["00", "00", "00", "00"];
+        const divisors = [86400, 3600, 60, 1];
+        let remainder = this.seconds;
+        
+        for(let i = 0; i < segments.length; i++){
+            segments[i] = String(Math.floor(remainder / divisors[i])).padStart(2, 0);
+            remainder %= divisors[i];
+        };
 
-        const rute = [86400, 3600, 60, 1]
-
-        let rest = this.seconds;
-
-        for(let i = 0; i < formato.length; i++){
-            formato[i] = String(Math.floor(rest / rute[i])).padStart(2, 0);
-            rest -= rute[i] * (rest / rute[i]);
-        }
-
-        /*
-        for(let i = this.seconds; this.seconds > 0; i--){
-            if(this.seconds >= 86400){
-                formato[0] = String(Math.floor(this.seconds / 86400));
-                this.seconds -= 86400
-            }
-            else if(this.seconds >= 3600  && this.seconds <= 86399){
-                console.log(this.seconds)
-                hours++;
-                formato[1] = String(Math.floor(this.seconds / 3600)).padStart(2, 0);
-                this.seconds -= 3600
-            }
-            else if(this.seconds > 59 && this.seconds < 3600){
-                minutes++;
-                formato[2] = String(Math.floor(minutes)).padStart(2, 0);
-                this.seconds -= 60;
-            }
-            else if(this.seconds < 60){
-                formato[3] = String(Math.floor(this.seconds)).padStart(2, 0);
-                this.seconds -= this.seconds
-            }
-        }     */
-        return formato.join(":"); // esperado: 1 dia 22 horas 44 segundos 
-    }
+        return segments.join(":");
+    };
 };
 
-// const t1 = new Timer(59);
-// const t2 = new Timer(3600);
-// const t3 = new Timer(58);
-// const t4 = new Timer(83222);
+const t1 = new Timer(59);
+const t2 = new Timer(3600);
+const t3 = new Timer(58);
+const t4 = new Timer(83222);
 const t5 = new Timer(166444);
 
-// console.log(t1.format());
-// console.log(t2.format());
-// console.log(t3.format());
-// console.log(t4.format());
+console.log(t1.format());
+console.log(t2.format());
+console.log(t3.format());
+console.log(t4.format());
 console.log(t5.format());
