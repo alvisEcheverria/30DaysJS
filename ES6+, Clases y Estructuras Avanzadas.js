@@ -45,8 +45,49 @@ const t3 = new Timer(58);
 const t4 = new Timer(83222);
 const t5 = new Timer(166444);
 
-console.log(t1.format());
-console.log(t2.format());
-console.log(t3.format());
-console.log(t4.format());
-console.log(t5.format());
+// console.log(t1.format());
+// console.log(t2.format());
+// console.log(t3.format());
+// console.log(t4.format());
+// console.log(t5.format());
+
+
+//Día 9: Heredar Timer para crear CountdownTimer que reste tiempo y devuelva el estado.
+
+// 1. Crea una clase CountdownTimer que herede de Timer.
+
+// 2. Debe recibir un número de segundos inicial (ejemplo: new CountdownTimer(10)).
+
+// 3. Agrega un método tick() que reste 1 segundo al tiempo restante cada vez que se llama.
+
+// 4. Agrega un método status() que devuelva un string con el tiempo restante formateado (usando el format() heredado).
+
+// 5. Cuando llegue a 0, el status() debe devolver "Finished".
+
+// 📌 Reglas
+
+// Prohibido reescribir format() en CountdownTimer, tienes que reutilizar el del Timer.
+
+// Usa herencia con extends y super.
+
+// El estado debe depender de si aún quedan segundos o no.
+
+
+class CountdownTimer extends Timer {
+    tick() {
+        
+    };
+    status() {
+        if(this.seconds > 0){
+            return super.format();
+        }
+        else{
+            return "Finished";
+        }
+    };
+};
+
+const cT = new CountdownTimer(1509);
+
+console.log(cT.tick());
+console.log(cT.status());
