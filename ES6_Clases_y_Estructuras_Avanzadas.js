@@ -75,19 +75,17 @@ const t5 = new Timer(166444);
 
 class CountdownTimer extends Timer {
     tick() {
-        
+        if(this.seconds > 0) this.seconds--;
     };
+
     status() {
-        if(this.seconds > 0){
-            return super.format();
-        }
-        else{
-            return "Finished";
-        }
+        return this.seconds > 0? super.format() : "Finished";
     };
 };
 
 const cT = new CountdownTimer(1509);
 
-console.log(cT.tick());
+cT.tick();
 console.log(cT.status());
+
+export default cT; 
