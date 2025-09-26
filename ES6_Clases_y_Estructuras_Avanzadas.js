@@ -89,3 +89,30 @@ cT.tick();
 console.log(cT.status());
 
 export default cT; 
+
+// Día 10 – Usar Map para almacenar nombres de usuarios y sus edades, luego iterar.
+
+// Objetivo: usar un Map para asociar nombres de usuarios con sus edades y luego poder iterar sobre ellos.
+
+const users = [
+    { name: "Ana", age: 17 },
+    { name: "Luis", age: 18 },
+    { name: "Marta", age: 21 },
+    { name: "Raúl", age: 19 }
+];
+
+const map = new Map();
+// const map2 = new Map(users.map(user => [user.name, user.age]));
+
+for(let user of users){
+    const values = Object.values(user);
+    map.set(values[0], values[1]);
+};
+
+map.forEach((age, name)=>{
+    console.log(`Nombre: ${name} - Edad: ${age}`);
+});
+    
+
+
+
