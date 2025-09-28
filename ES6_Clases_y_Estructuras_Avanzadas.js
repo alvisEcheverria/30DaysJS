@@ -90,7 +90,7 @@ console.log(cT.status());
 
 export default cT; 
 
-// Día 10 – Usar Map para almacenar nombres de usuarios y sus edades, luego iterar.
+// Día 10: Usar Map para almacenar nombres de usuarios y sus edades, luego iterar.
 
 // Objetivo: usar un Map para asociar nombres de usuarios con sus edades y luego poder iterar sobre ellos.
 
@@ -112,7 +112,15 @@ for(let user of users){
 map.forEach((age, name)=>{
     console.log(`Nombre: ${name} - Edad: ${age}`);
 });
-    
 
+//Día 11: Usar Set para eliminar duplicados de un array de números.
+
+const numbers = [1,1,4,5,6,5,10,22,22,10,12];
+
+const setNumbers = new Set(numbers);
+
+const arrayNumbers = [...setNumbers];
+    
+console.log(arrayNumbers);
 
 
